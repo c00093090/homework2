@@ -163,16 +163,29 @@ map(commitCheck,~.[[3]][[2]][[3]][[1]]) -> allCommitDatesList
 
 allCommitDatesList是個list，請使用`unlist()`函數將它轉成一個atomic vector其class為character，並存在allCommitDates答案物件。（最後一行最忘了打答案物件）
 ```{r ans24}
+allCommitDates <- unlist(allCommitDatesList)
+class(allCommitDates)
+allCommitDates
 ```
 
 ### 2.5 
 allCommitDates是UTC時區的時間文字字串，請將它轉成date time格式，再改成台灣時區後，存在allCommitDatesTW答案物件。（最後一行最忘了打答案物件）
 ```{r ans25}
+library(lubridate)
+allCommitDates01 <- ymd_hms(c(allCommitDates))
+class(allCommitDates01)
+allCommitDatesTW <- with_tz(allCommitDates01, tz="Asia/Taipei")
+allCommitDatesTW
 ```
 
 ### 2.6
 使用`hour()`及`minute()`可分別將date time元素的「小時」及「分鐘」取出（其中小時是24小時制）。請創立一個logical vector答案物件logicWithinTimeFrame，各個元素值為TRUE時代表allCommitDatesTW的時間落在凌晨4點30到凌晨6點30之間（含起迄時點）。（最後一行最忘了打答案物件）
 ```{r ans26}
+library(stringr)
+hour01 <- hour(allCommitDatesTW)
+min01 <- minute(allCommitDatesTW)
+max01 <- str_c(hour01,min01)
+logic01 <- 
 ```
 
 ## 3
@@ -187,18 +200,28 @@ transcriptData的class是data frame（用`class(transcriptData)`可得知），�
 ### 3.1
 請查詢transcriptData元素名稱，並將它們存在名為variableNames的character vector答案物件裡。（最後一行最忘了打答案物件）
 ```{r ans31}
+variablenames <- names(transcriptData)
+class(variablenames)
+variablenames
 ```
 
 ### 3.2
 variableNames裡每個值是這資料有的欄位名稱，我們常稱之為**變數名稱**。請創造一個logic vector名為logicFromEcon的答案物件，其各別元素值為TRUE當「學系」變數裡的對應元素值為"經濟學系"。（最後一行最忘了打答案物件）
 
 ```{r ans32}
+library(stringr)
+which(variablenames=="學系")
+t1<- transcriptData[[3]]
+logicFromEcon <-(t1 %in% "經濟學系" )
+logicFromEcon
 ```
 
 ### 3.3
 請由transcriptData中選出"學號","學分數","必選修類別（必∕選∕通）"變數（使用`[.]` extraction）並存成transcriptPartialData答案物件。（最後一行最忘了打答案物件）
 
 ```{r ans33}
+transcriptPartialData <- transcriptData[c("學號","學分數","必選修類別（必∕選∕通）")]
+transcriptPartialData
 ```
 
 ### 3.4
@@ -207,6 +230,7 @@ variableNames裡每個值是這資料有的欄位名稱，我們常稱之為**�
 > 這題會使用到name=value將賦予元素名稱，若name有特別字元時，我們可換成"name"=value的形式書寫，如： x <- list(z=c(1,2),"this is special"=c(T,F,T,T,F))
 
 ```{r ans34}
+transcriptPartialDataEcon　　　
 ```
 
 
