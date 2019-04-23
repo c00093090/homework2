@@ -86,11 +86,18 @@ studentRecord <-
 
 請將元素名稱「學年平均成績」改成「平均成績」。（此題最後一行請輸入studentRecord，老師改題時會看studentRecord的names有沒有正確更改。）
 ```{r ans11}
+names(studentRecord)[c(4)] <- c("平均成績")
+names(studentRecord)
+studentRecord
 ```
 
 ### 1.2
 請將"一年級"，"二年級"，"三年級"，"四年級"改成"一"，"二"，"三"，"四"。（hint: 改掉studentRecord[[4]]的元素名稱。）（此題最後一行請輸入studentRecord，老師改題時會看studentRecord的names有沒有正確更改。）
 ```{r ans12}
+x <- studentRecord[[4]]
+names(x) <- c("一","二","三","四")
+studentRecord[[4]] <-x
+studentRecord
 ```
 
 
@@ -114,17 +121,37 @@ commitCheck <- fromJSON(commitCheck, simplifyVector = F)
 ### 2.1
 請取出commitCheck第8個元素底下的**commit**元素，再拿出它底下的**committer**元素，再拿出它底下的**date**元素的第一個值，存成commit8Date答案物件（為character class) 。（最後一行最忘了打答案物件）
 ```{r ans21}
+
+x1 <- commitCheck[[8]]
+x2 <- x1[["commit"]]
+x3 <- x2[["committer"]]
+x4 <- x3[["date"]]
+commit8Date <- x4[[1]]
+commit8Date
 ```
 
 
 ### 2.2
 commit8Date的日期時間為UTC時間，請將它轉成台灣時間的date time class並存在答案物件commit8TWDate。（最後一行最忘了打答案物件）
 ```{r ans22}
+library(lubridate)
+commit8Date01 <- ymd_hms(c(commit8Date))
+class(commit8Date01)
+commit8TWDate <- with_tz(commit8Date01, tz="Asia/Taipei")
+commit8TWDate
 ```
 
 ### 2.3
 原本commitCheck裡的元素沒有命名（`names(commitCheck)`會顯示NULL），請將這些元素依其位置順序命名為"commit1","commit2", "commit3"等等。此題最後一行請輸入commitCheck，老師改題時會看commitCheck的names有沒有正確更改。）(hint: `c(1:5)`可創出c(1,2,3,4,5); `length(commitCheck)`會給你commitCheck元素個數)
 ```{r ans23}
+length(commitCheck)
+names(commitCheck)[c(1:30)] <- c("commit1","commit2","commit3", "commit4","commit5",
+                                 "commit6","commit7", "commit8","commit9","commit10",
+                                 "commit11","commit12","commit13", "commit14","commit15",
+                                 "commit16","commit17", "commit18","commit19","commit20",
+                                 "commit21","commit22","commit23", "commit24","commit25",
+                                 "commit26","commit27", "commit28","commit29","commit30")
+commitCheck
 ```
 
 ### 2.4
