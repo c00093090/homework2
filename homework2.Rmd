@@ -202,9 +202,9 @@ transcriptData的class是data frame（用`class(transcriptData)`可得知），�
 ### 3.1
 請查詢transcriptData元素名稱，並將它們存在名為variableNames的character vector答案物件裡。（最後一行最忘了打答案物件）
 ```{r ans31}
-variablenames <- names(transcriptData)
-class(variablenames)
-variablenames
+variableNames <- names(transcriptData)
+class(variableNames)
+variableNames
 ```
 
 ### 3.2
@@ -212,7 +212,7 @@ variableNames裡每個值是這資料有的欄位名稱，我們常稱之為**�
 
 ```{r ans32}
 library(stringr)
-which(variablenames=="學系")
+which(variableNames=="學系")
 t1<- transcriptData[3]
 logicFromEcon <-(t1 == "經濟學系" )
 logicFromEcon
