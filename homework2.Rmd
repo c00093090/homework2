@@ -154,6 +154,18 @@ names(commitCheck)[c(1:30)] <- c("commit1","commit2","commit3", "commit4","commi
 commitCheck
 ```
 
+```{r newans23}
+names(commitCheck) <- 
+  str_c(
+    "commit", c(1:length(commitCheck))
+  )
+names(commitCheck)
+
+commitCheck
+```
+
+
+
 ### 2.4
 請先安裝**purrr**套件，接著執行以下程式得到allCommitDatesList這個物件，裡頭每個元素都是每一次commit的日期時間。
 ```{r data14}
@@ -190,6 +202,16 @@ logicWithinTimeFrame <- (max01<=630 & max01>=430)
 logicWithinTimeFrame
 ```
 
+
+```{r rightans26}
+hours <- hour(allCommitDatesTW)
+minutes <- minute(allCommitDatesTW)/60
+hh.mm <- hours+minutes
+logicWithinTimeFrame <- (hh.mm >= 4+(30/60) & hh.mm <= 6+(30/60))
+
+logicWithinTimeFrame
+```
+
 ## 3
 
 執行以下程式引入學生成績單資料物件transcriptData:
@@ -218,6 +240,14 @@ logicFromEcon <-(t1 == "經濟學系" )
 logicFromEcon
 ```
 
+```{r}
+logicFromEcon <-
+  transcriptData$學系 == "經濟學系"
+
+logicFromEcon
+```
+
+
 ### 3.3
 請由transcriptData中選出"學號","學分數","必選修類別（必∕選∕通）"變數（使用`[.]` extraction）並存成transcriptPartialData答案物件。（最後一行最忘了打答案物件）
 
@@ -241,6 +271,16 @@ class(transcriptPartialDataEcon)
 transcriptPartialDataEcon
 ```
 
+```{r rightans34}
+## ----ans34---------------------------------------------------------------
+transcriptPartialDataEcon <- list(
+  學號=transcriptPartialData$學號[logicFromEcon],
+  學分數=transcriptPartialData$學分數[logicFromEcon],
+  "必選修類別（必∕選∕通）"=transcriptPartialData$`必選修類別（必∕選∕通）`[logicFromEcon]
+)
+
+transcriptPartialDataEcon
+```
 
 > 答完後上傳前，請確認每個code chunk的最後一行皆為該題的答案物件（除非題目有另外規定），且frontmatter的studentID及studentName皆有填寫。
 
